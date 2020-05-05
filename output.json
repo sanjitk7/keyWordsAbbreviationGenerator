@@ -1,1 +1,15 @@
-{"dc": ["DataCollections", "DoCancel"], "frsi": ["FinalizeResponseStatusInfo"], "au": ["AccountUpdater"], "scce": ["smallCamelCaseExample"]}
+{
+    "dc": [
+        "DataCollections",
+        "DoCancel"
+    ],
+    "frsi": [
+        "FinalizeResponseStatusInfo"
+    ],
+    "au": [
+        "AccountUpdater"
+    ],
+    "scce": [
+        "smallCamelCaseExample"
+    ]
+}
