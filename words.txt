@@ -12,4 +12,5 @@ AccountUpdater
 accounts
 travel_agency_name
 travel_agent_name
+smallCamelCaseExample
 _15BITS

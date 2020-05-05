@@ -1,6 +1,8 @@
+# Sanjit Original Script - Modified to check for camelCase and PascalCase. Also ignoring "underscore words now"
+
 import re
 
-file_path = "words.txt"
+file_path = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/onlyCamelPascalWords.txt"
 #dictionary for words
 acryDict = {}
 
@@ -21,7 +23,14 @@ def checkUnderscore(word):
 
 #split camel case words
 def camelCaseSplit(str):
-    return re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', str)
+    if (str[0].islower()):
+        camelCheck = re.findall(r'^[a-z]*|[A-Z]\w*',str)
+        if  (isMultiWordCamel(camelCheck[1])):
+            tempPascalSplit = re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', str)
+            tempPascalSplit.insert(0,camelCheck[0])
+            return tempPascalSplit
+    else:
+        return re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', str)
 
 #adding keywords to respective acronym
 def addToDict(acronym,keyword):
@@ -31,14 +40,11 @@ def addToDict(acronym,keyword):
         acryDict[acronym] = [keyword]
 
 def main(word):
-    if ((not word == "") and (not word.isupper()) and (checkUnderscore(word)
- or isMultiWordCamel(word))):
-        if('_' in word):
-            SplitWords = word.split('_')
-        elif (isMultiWordCamel(word)):
+    if ((not word == "" and not checkUnderscore(word)) and (not word.isupper()) and (isMultiWordCamel(word))):
+        # if('_' in word):
+        #     SplitWords = word.split('_')
+        if (isMultiWordCamel(word)):
             SplitWords = camelCaseSplit(word)
-
-
         tempAcronym = ""
         for w in SplitWords:
             #print("w:", w)
