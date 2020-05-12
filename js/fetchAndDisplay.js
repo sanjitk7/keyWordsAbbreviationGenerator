@@ -7,7 +7,6 @@ function appendData(data) {
         if (acry.length >=3){
             console.log("Item: ",acry)
 
-            var div = document.createElement("div");
             let keywordBold = ""
 
             for (i=0;i<data[acry].length;i++){
