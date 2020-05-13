@@ -4,6 +4,7 @@ const outputPath = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerato
 const dataBuffer = fs.readFileSync(outputPath)
 const jsonData = dataBuffer.toString()
 const outputObj = JSON.parse(jsonData)
+var json = undefined
 
 for (var acry in outputObj){
 
@@ -25,11 +26,12 @@ for (var acry in outputObj){
                 name,
                 displayName: keywordBold
             }
-            outputObj[acry][i] = itemObj
+            json[acry][i] = itemObj
         }
     } 
     // else{
-    //     console.log(acry," length not >=3")
+    //     delete outputObj.acry
+    //     console.log(outputObj[acry])
     // }
 }
 
