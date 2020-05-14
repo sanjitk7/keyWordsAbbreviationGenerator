@@ -3,14 +3,6 @@
 import re
 import json
 
-file_in_path = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/words.txt"
-file_op_path = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/output.json"
-#dictionary for words
-acryDict = {}
-
-with open(file_in_path) as f:
-    fileWords = f.readlines()
-
 #check camel case 2 words
 def isMultiWordCamel(word):
     x = re.search(".*[a-z][A-Z].*",word)
@@ -37,10 +29,10 @@ def camelCaseSplit(str):
 
 #adding keywords to respective acronym
 def addToDict(acronym,keyword):
-    if (acronym in acryDict):
-        acryDict[acronym].append(keyword)
+    if (acronym in abbrDict):
+        abbrDict[acronym].append(keyword)
     else:
-        acryDict[acronym] = [keyword]
+        abbrDict[acronym] = [keyword]
 
 def main(word):
     if ((not word == "" and not checkUnderscore(word)) and (not word.isupper()) and isMultiWordCamel(word)):
@@ -57,32 +49,39 @@ def main(word):
     else:
         return ""
 
-# #screen and ignore single words and caps words
-# print("List of all words from the file:\n")
 
-for word in fileWords:
-    word = word.strip('\n').strip()
-    result = main(word)
+if (__name__=="__main__"):
+    file_in_path = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/words.txt"
+    file_op_path = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/output.json"
+    #dictionary for words
+    abbrDict = {}
 
-    if (result!="" and (len(result) > 1)):
-        addToDict(result,word)
+    with open(file_in_path) as f:
+        fileWords = f.readlines()
 
-#print("result: ",acryDict)
-json = json.dumps(acryDict)
-with open(file_op_path, "w") as fout:
-    fout.write(json)
+    for word in fileWords:
+        word = word.strip('\n').strip()
+        abbreviation = main(word)
+
+        if (abbreviation!="" and (len(abbreviation) > 1)):
+            addToDict(abbreviation,word)
+
+    #print("abbreviation: ",abbrDict)
+    json = json.dumps(abbrDict)
+    with open(file_op_path, "w") as fout:
+        fout.write(json)
 
 
-# Iterate over items in dict and print line by line
-# summaryDict = {}
-# for key, value in acryDict.items():
-#         summaryDict[key] = len(value)
+    # Iterate over items in dict and print line by line
+    # summaryDict = {}
+    # for key, value in abbrDict.items():
+    #         summaryDict[key] = len(value)
 
-# sortedKeyBased = {key:value for key, value in sorted(summaryDict.items(), key=lambda k: (len(k[0]),k[0],k[1]),reverse = True)} 
-# [print(k,v) for k,v in sortedKeyBased.items()]
+    # sortedKeyBased = {key:value for key, value in sorted(summaryDict.items(), key=lambda k: (len(k[0]),k[0],k[1]),reverse = True)} 
+    # [print(k,v) for k,v in sortedKeyBased.items()]
 
-# print("============================")
-        
-# sortedSummary = { key: value for key, value in sorted(summaryDict.items(), key=lambda item: item[0],reverse = True)}
-# [print(k,v) for k,v in sortedSummary.items()]
-# print(acryDict)
+    # print("============================")
+            
+    # sortedSummary = { key: value for key, value in sorted(summaryDict.items(), key=lambda item: item[0],reverse = True)}
+    # [print(k,v) for k,v in sortedSummary.items()]
+    # print(abbrDict)

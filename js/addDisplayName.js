@@ -3,37 +3,33 @@ const fs = require("fs")
 const outputPath = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/output.json"
 const dataBuffer = fs.readFileSync(outputPath)
 const jsonData = dataBuffer.toString()
-const outputObj = JSON.parse(jsonData)
+const inputObj = JSON.parse(jsonData)
 var json = undefined
 
-for (var acry in outputObj){
+for (var acry in inputObj){
 
     if (acry.length>=3){
         // console.log("Item: ",acry)
-        let keywordBold = ""
 
-        for (i=0;i<outputObj[acry].length;i++){
-            for (j=0;j<outputObj[acry][i].length;j++){
+        for (i=0;i<inputObj[acry].length;i++){
+            let keywordBold = ""
+            for (j=0;j<inputObj[acry][i].length;j++){
 
-                if (outputObj[acry][i][j] === outputObj[acry][i][j].toUpperCase() || j === 0){
-                    keywordBold = keywordBold + "<b>" +outputObj[acry][i][j] + "</b>"
+                if (inputObj[acry][i][j] === inputObj[acry][i][j].toUpperCase() || j === 0){
+                    keywordBold = keywordBold + "<b>" +inputObj[acry][i][j] + "</b>"
                 } else{
-                    keywordBold = keywordBold + outputObj[acry][i][j]
+                    keywordBold = keywordBold + inputObj[acry][i][j]
                 }
             }
-            var name = outputObj[acry][i]
-            var itemObj = {
+            var outpuObj = inputObj[acry][i]
+            var outpuObj = {
                 name,
                 displayName: keywordBold
             }
-            json[acry][i] = itemObj
+            json[acry][i] = outpuObj
         }
     } 
-    // else{
-    //     delete outputObj.acry
-    //     console.log(outputObj[acry])
-    // }
 }
 
-var alteredData = JSON.stringify(outputObj)
+var alteredData = JSON.stringify(outpuObj)
 fs.writeFileSync("outputMadeBoldJSON.json",alteredData)

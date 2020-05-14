@@ -4,7 +4,6 @@ import re
 
 file_path = "/Users/sanjitkumar/personal_projects/keyWordsAcronymGenerator/onlyCamelPascalWords.txt"
 #dictionary for words
-acryDict = {}
 
 with open(file_path) as f:
     fileWords = f.readlines()
@@ -55,6 +54,7 @@ def main(word):
 
 # #screen and ignore single words and caps words
 # print("List of all words from the file:\n")
+acryDict = {}
 
 for word in fileWords:
     word = word.strip('\n').strip()
