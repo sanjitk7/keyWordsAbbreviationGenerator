@@ -5,13 +5,16 @@ import json
 
 #check camel case 2 words
 def isMultiWordCamel(word):
-    x = re.search(".*[a-z][A-Z].*",word)
+    # x = re.search(".*[a-z].*",word)
+    x = re.search(r"(.+?)([A-H])",word)
     if (x):
         return True
+    return False
 
 #check _ words
 def checkUnderscore(word):
-    x = re.search("^[^_].*_.*[^_]$",word)
+    # x = re.search("^[^_].*_.*[^_]$",word)
+    x = re.search(r"(.*?)_([a-zA-Z])",word)
     if (x):
         return True
 
